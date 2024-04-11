@@ -55,9 +55,13 @@ Rest API server with Nestjs
 - recipe.service.ts: constructor(private prisma: PrismaService) {}
 
 ## How to Define the GET /recipes Endpoint
-- recipe.controller.ts: import { Controller, Get } from '@nestjs/common';
-- recipe.controller.ts: @Controller('recipes')
-- recipe.controller.ts: @Get()
+- recipe.controller.ts: 
+```typescript
+@Get()
+async findAll() {
+  return await this.recipeService.findAll();
+}
+```
 
 - recipe.service.ts: 
 ```typescript
@@ -65,5 +69,24 @@ async findAll() {
     return this.prisma.recipe.findMany();
 }
 ```
+
+## How to Define the POST, PATCH and DELETE Endpoints
+- At the same way of GET, but we have to define DTO's.
+
+## Secure the application
+- Install necessary dependencies:
+```bash
+npm install @nestjs/passport passport passport-local
+npm install -D @types/passport-local
+```
+
+- Generate the module and the service:
+```bash
+npx nest g module auth
+npx nest g service auth
+npx nest g module users
+npx nest g service users
+```
+
 
 ## Conclusion
