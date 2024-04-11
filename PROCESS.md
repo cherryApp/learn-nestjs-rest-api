@@ -132,5 +132,12 @@ npm install -D @types/passport-jwt
 - Update app.controller.ts: the login function returns the AuthService login method.
 - Test it with a fetch request.
 
+- __Implementing Passport JWT__
+- Create auth/jwt.strategy.ts: a strategy for JWT based guards.
+- Update auth/auth.module.ts: add the new JwtStrategy to the providers.
+- Create auth/jwt-auth.guard.ts
 
+- __Implement protected routes__
+- Update app.controller.ts: use JwtAuthGuard for desired routes.
+- 
 ## Conclusion
