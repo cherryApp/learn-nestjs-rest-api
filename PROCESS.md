@@ -74,6 +74,7 @@ async findAll() {
 - At the same way of GET, but we have to define DTO's.
 
 ## Secure the application
+- [Documentation](https://docs.nestjs.com/recipes/passport)
 - Install necessary dependencies:
 ```bash
 npm install @nestjs/passport passport passport-local
@@ -87,6 +88,49 @@ npx nest g service auth
 npx nest g module users
 npx nest g service users
 ```
+
+- Update users/user.service.ts
+- Update users/user.module.ts: export the UsersService
+
+- Update auth/auth.service.ts
+- Update auth/auth.module.ts: import UsersModule
+
+- Implementing the Passport's local authentication strategy.
+- Create the descriptor file: auth/local.strategy.ts
+- Update auth/auth.module.ts: 
+  - add LocalStrategy to the providers
+  - add PassportModule to the imports
+
+- __Setup built-in Guards__
+- Update app.controller.ts: add a guarded post request to login
+- Test it from the browser:
+```javascript
+fetch ('/auth/login', {
+    method: 'POST',
+    headers: {
+        'Content-type': 'application/json',
+    },
+    body: '{"username": "john", "password": "changeme"}'
+}).then( r => r.json() )
+.then( data => console.log(data) );
+```
+
+- __Create LocalAuthGuard__
+- Create new file: auth/local-auth.guard.ts
+- Define the LocalAuthGuard class.
+- Apply the guard in the AppController: @UseGuards(LocalAuthGuard)
+
+- __JWT Functionality__
+- Add dependencies:
+```bash
+npm install @nestjs/jwt passport-jwt
+npm install -D @types/passport-jwt
+```
+- Update auth/auth.service.ts: implementing the login method.
+- Create auth/constants.ts: add jwtContants.secret, export AuthService.
+- Update auth/auth.module.ts: setup JWT.
+- Update app.controller.ts: the login function returns the AuthService login method.
+- Test it with a fetch request.
 
 
 ## Conclusion
