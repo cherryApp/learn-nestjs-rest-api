@@ -139,5 +139,8 @@ npm install -D @types/passport-jwt
 
 - __Implement protected routes__
 - Update app.controller.ts: use JwtAuthGuard for desired routes.
+
+## Nestjs + Prisma Authentication
+- [Documentation](https://www.prisma.io/blog/nestjs-prisma-authentication-7D056s1s0k3l)
 - 
 ## Conclusion
